@@ -341,13 +341,16 @@ const App: React.FC = () => {
                      من فئة <span className="font-bold">{selectedDenom}</span> ليرة
                    </p>
                    
-                   <div className="mt-3 pt-3 border-t border-stone-200/50 text-center relative z-10">
-                     <p className={`text-xs font-medium ${breakdown.remainder > 0 ? 'text-amber-600' : 'text-stone-400'}`}>
-                       {breakdown.remainder > 0 
-                         ? `المتبقي (فراطة): ${formatCurrency(breakdown.remainder)} ليرة` 
-                         : 'لا يوجد فراطة'}
-                     </p>
-                   </div>
+                   {breakdown.remainder > 0 && (
+                     <div className="mt-3 pt-3 border-t border-stone-200/50 text-center relative z-10">
+                       <p className="text-xs font-medium text-amber-600">
+                         {`المتبقي (فراطة): ${formatCurrency(breakdown.remainder)} ليرة`}
+                       </p>
+                       <p className="text-[10px] text-stone-400 mt-1 font-medium">
+                         {`(تعادل ${formatCurrency(breakdown.remainder * 100)} ليرة من العملة القديمة)`}
+                       </p>
+                     </div>
+                   )}
                 </div>
               </div>
             )}
