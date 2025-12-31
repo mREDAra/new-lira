@@ -376,7 +376,7 @@ const App: React.FC = () => {
 
           {/* Copyright & Social */}
           <div className="text-[10px] text-stone-400 text-center">
-             <span>جميع الحقوق محفوظة © ٢٠٢٦ لـ </span>
+             <span>جميع الحقوق محفوظة © 2026 لـ </span>
              <a 
                href="https://www.instagram.com/m_reda_ra/" 
                target="_blank" 
