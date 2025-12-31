@@ -358,7 +358,7 @@ const App: React.FC = () => {
         {/* Note Below Card */}
         <div className="text-center px-6">
           <p className="text-stone-400 text-xs leading-relaxed opacity-80">
-            أداة تقديرية. الليرة الجديدة تساوي 100 ليرة حالية.
+           الليرة الجديدة تساوي 100 ليرة قديمة.
           </p>
         </div>
 
