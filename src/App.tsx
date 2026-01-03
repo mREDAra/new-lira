@@ -88,7 +88,8 @@ const App: React.FC = () => {
   };
 
   const formatCurrency = (val: number) => {
-    return new Intl.NumberFormat('ar-SY', formatOptions).format(val);
+    // Use en-US to ensure comma separators (1,000) are used consistently
+    return new Intl.NumberFormat('en-US', formatOptions).format(val);
   };
 
   const handleCopy = () => {
@@ -372,7 +373,7 @@ const App: React.FC = () => {
                           : 'bg-white text-stone-500 border-stone-200 hover:border-[#1B4D3E]/30'
                       }`}
                     >
-                      {d}
+                      {formatCurrency(d)}
                     </button>
                   ))}
                 </div>
@@ -382,8 +383,8 @@ const App: React.FC = () => {
                    <div className="absolute top-0 right-0 w-16 h-16 bg-[#D4AF37]/5 rounded-bl-full -mr-2 -mt-2"></div>
                    
                    <p className="text-sm text-stone-700 leading-relaxed text-center relative z-10">
-                     أنت بحاجة إلى <span className="font-bold text-[#1B4D3E] text-lg mx-1">{breakdown.count}</span> ورقة نقدية <br/>
-                     من فئة <span className="font-bold">{selectedDenom}</span> ليرة
+                     أنت بحاجة إلى <span className="font-bold text-[#1B4D3E] text-lg mx-1">{formatCurrency(breakdown.count)}</span> ورقة نقدية <br/>
+                     من فئة <span className="font-bold">{formatCurrency(selectedDenom)}</span> ليرة
                    </p>
                    
                    {breakdown.remainder > 0 && (
