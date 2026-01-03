@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ArrowLeftRight, Copy, Share2, RotateCcw, Check, Banknote, Download, X, Smartphone, MoreVertical, Share as ShareIcon, MoreHorizontal, PlusSquare, MonitorDown } from 'lucide-react';
 import PatternBackground from './components/PatternBackground';
 import Header from './components/Header';
+import SponsoredBanner from './components/SponsoredBanner';
 import { ConversionDirection } from './types';
 import { numberToArabicText, toIndicDigits } from './utils';
 
@@ -330,6 +331,9 @@ const App: React.FC = () => {
                 )}
               </button>
             </div>
+            
+            {/* Sponsored Banner - Kiyan Group */}
+            <SponsoredBanner />
             
             {/* Share Button - Replaces Calculate */}
             <button 
