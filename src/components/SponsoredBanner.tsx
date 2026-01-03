@@ -9,11 +9,6 @@ const SponsoredBanner: React.FC = () => {
         {/* Subtle decorative accent */}
         <div className="absolute top-0 right-0 w-1 h-full bg-[#D4AF37] opacity-90" />
 
-        {/* Ad Label */}
-        <div className="absolute top-0 left-0 bg-stone-50 text-[9px] text-stone-400 px-2 py-0.5 rounded-br-lg border-b border-r border-stone-100 z-10">
-          إعلان
-        </div>
-
         <div className="flex items-center justify-between gap-3 pl-1 pr-2 relative z-0">
           {/* Text Content */}
           <div className="flex-1 flex flex-col justify-center min-w-0">
