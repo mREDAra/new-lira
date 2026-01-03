@@ -236,7 +236,7 @@ const App: React.FC = () => {
             <div className="flex flex-col gap-2">
               <label htmlFor="amount" className="text-stone-600 font-semibold text-sm text-right px-1 flex justify-between items-center">
                 <span>المبلغ</span>
-                <span className="text-stone-400 font-normal text-xs">(ل.س {direction === ConversionDirection.RemoveZeros ? 'حالي' : 'جديد'})</span>
+                <span className="text-stone-400 font-normal text-xs">(ل.س {direction === ConversionDirection.RemoveZeros ? 'قديمة' : 'جديدة'})</span>
               </label>
               <div className="relative">
                 <input
@@ -299,7 +299,7 @@ const App: React.FC = () => {
               <div className="text-stone-500 text-xs font-bold mb-3 uppercase tracking-wider">
                 النتيجة 
                 <span className="font-normal opacity-70 mr-1">
-                  ({direction === ConversionDirection.RemoveZeros ? 'بعد الحذف' : 'قبل الحذف'})
+                  ({direction === ConversionDirection.RemoveZeros ? 'العملة الجديدة' : 'العملة القديمة'})
                 </span>
               </div>
               
