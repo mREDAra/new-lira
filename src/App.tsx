@@ -3,6 +3,7 @@ import { ArrowLeftRight, Copy, Share2, RotateCcw, Check, Banknote, Download, X, 
 import PatternBackground from './components/PatternBackground';
 import Header from './components/Header';
 import { ConversionDirection } from './types';
+import { numberToArabicText, toIndicDigits } from './utils';
 
 const App: React.FC = () => {
   const [amount, setAmount] = useState<string>('');
@@ -39,6 +40,23 @@ const App: React.FC = () => {
       setDeviceType('android');
     }
   }, []);
+
+  // Handle Input Change with Comma Formatting
+  const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Remove existing commas to get raw number
+    const rawValue = e.target.value.replace(/,/g, '');
+    
+    // Check if valid positive integer (allow empty)
+    if (rawValue === '' || /^\d+$/.test(rawValue)) {
+      if (rawValue === '') {
+        setAmount('');
+      } else {
+        // Format with commas using Intl
+        const formatted = new Intl.NumberFormat('en-US').format(BigInt(rawValue));
+        setAmount(formatted);
+      }
+    }
+  };
 
   const calculate = (val: string, dir: ConversionDirection) => {
     if (!val) return null;
@@ -151,6 +169,20 @@ const App: React.FC = () => {
 
   const breakdown = getBreakdown();
 
+  // Prepare textual representation for input
+  const getAmountTextDetails = () => {
+    if (!amount) return null;
+    const rawVal = parseInt(amount.replace(/,/g, ''));
+    if (isNaN(rawVal)) return null;
+    
+    return {
+      text: numberToArabicText(rawVal),
+      indic: toIndicDigits(amount)
+    };
+  };
+
+  const amountDetails = getAmountTextDetails();
+
   return (
     <div className="min-h-screen relative flex flex-col items-center font-sans text-gray-800 overflow-x-hidden selection:bg-[#1B4D3E] selection:text-white">
       <PatternBackground />
@@ -209,10 +241,10 @@ const App: React.FC = () => {
               <div className="relative">
                 <input
                   id="amount"
-                  type="number"
+                  type="text"
                   inputMode="decimal"
                   value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
+                  onChange={handleAmountChange}
                   placeholder="0"
                   className={`w-full text-4xl font-bold text-center py-4 border-b-2 bg-transparent focus:outline-none focus:ring-0 transition-colors placeholder:text-stone-200 ${primaryColor} ${
                     amount ? 'border-[#1B4D3E]' : 'border-stone-200'
@@ -228,18 +260,31 @@ const App: React.FC = () => {
                   </button>
                 )}
               </div>
-              <p className="text-[10px] text-stone-400 text-center mt-1">
-                يتم الحساب تلقائيًا عند إدخال المبلغ
-              </p>
+              
+              {/* Added: Textual representation and Indic numerals */}
+              {amountDetails ? (
+                <div className="text-center mt-1 animate-fade-in">
+                  <p className="text-sm font-medium text-[#1B4D3E] leading-relaxed">
+                    {amountDetails.text}
+                  </p>
+                  <p className="text-lg text-stone-400 font-ibm-plex font-normal mt-0.5" dir="ltr">
+                    ({amountDetails.indic})
+                  </p>
+                </div>
+              ) : (
+                <p className="text-[10px] text-stone-400 text-center mt-1">
+                  يتم الحساب تلقائيًا عند إدخال المبلغ
+                </p>
+              )}
 
               {/* Quick Amounts */}
-              <div className="mt-2">
+              <div className="mt-3">
                 <p className="text-[11px] text-stone-400 font-medium mb-2 text-right px-1 opacity-80">مبالغ شائعة</p>
                 <div className="grid grid-cols-3 gap-2">
                   {quickAmounts.map((amt) => (
                     <button
                       key={amt}
-                      onClick={() => setAmount(amt.toString())}
+                      onClick={() => setAmount(new Intl.NumberFormat('en-US').format(amt))}
                       className="text-xs font-medium text-stone-500 bg-stone-50 border border-stone-200 hover:border-[#1B4D3E]/40 hover:text-[#1B4D3E] hover:bg-white active:bg-[#1B4D3E]/10 rounded-full py-2 transition-all duration-200"
                     >
                       {new Intl.NumberFormat('en-US').format(amt)}
