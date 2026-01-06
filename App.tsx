@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeftRight, Copy, Share2, RotateCcw, Check, Banknote, Download, X, Smartphone, MoreVertical, Share as ShareIcon, MoreHorizontal, PlusSquare, MonitorDown } from 'lucide-react';
+import { Analytics } from '@vercel/analytics/react';
 import PatternBackground from './components/PatternBackground';
 import Header from './components/Header';
 import { ConversionDirection } from './types';
@@ -475,6 +476,7 @@ const App: React.FC = () => {
         </div>
       )}
 
+      <Analytics />
     </div>
   );
 };
